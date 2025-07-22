@@ -1,11 +1,18 @@
 pluginManagement {
     repositories {
-        mavenCentral()
         gradlePluginPortal()
-        mavenLocal()
+        mavenCentral()
     }
     plugins {
-        id "${quarkusPluginId}" version "${quarkusPluginVersion}"
+        id "io.quarkus" version "3.24.4"
     }
 }
-rootProject.name='mateuslh-rinha-de-back-end'
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = "mateuslh-rinha-de-back-end"

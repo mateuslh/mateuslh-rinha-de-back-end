@@ -5,33 +5,34 @@ plugins {
 
 repositories {
     mavenCentral()
-    mavenLocal()
 }
 
 dependencies {
-    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation enforcedPlatform('io.quarkus.platform:quarkus-bom:3.24.4')
     implementation 'io.quarkus:quarkus-arc'
-    implementation 'io.quarkus:quarkus-rest'
+    implementation 'io.quarkus:quarkus-resteasy-reactive:3.24.4'
+    implementation 'io.quarkus:quarkus-resteasy-reactive-jackson:3.24.4'
+    implementation 'io.quarkus:quarkus-rest-client-reactive:3.24.4'
+    implementation 'io.quarkus:quarkus-redis-client'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
 }
 
-group 'br.mateuslh'
-version '1.0.0-SNAPSHOT'
+group = 'br.mateuslh'
+version = '1.0.0-SNAPSHOT'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
 }
 
-test {
-    systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
-}
-compileJava {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
     options.compilerArgs << '-parameters'
 }
 
-compileTestJava {
-    options.encoding = 'UTF-8'
+test {
+    systemProperty 'java.util.logging.manager', 'org.jboss.logmanager.LogManager'
 }
